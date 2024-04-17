@@ -33,9 +33,9 @@ jobs:
       - checkout
       - docker/check
       - docker/build: #build the image
-          image: SCTP / node-app-for-devops
+          image: anushadevelopment/education-space
       - docker/push:
-          image: SCTP / node-app-for-devops
+          image: anushadevelopment/education-space
 # Workflow - defines what sequence will the jobs run
 workflows:
   simple_workflow: # workflow name
