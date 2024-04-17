@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-        pkg-manager: npm
+          pkg-manager: npm
       - run : |
           echo "Installing depedencies..."
           npm install
@@ -34,8 +34,10 @@ jobs:
       - docker/check
       - docker/build: #build the image
           image: anushadevelopment/education-space
+          tag: v1.0.1
       - docker/push:
           image: anushadevelopment/education-space
+          tag: v1.0.1
 # Workflow - defines what sequence will the jobs run
 workflows:
   simple_workflow: # workflow name
