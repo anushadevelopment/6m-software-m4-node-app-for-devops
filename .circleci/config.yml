@@ -47,11 +47,11 @@ jobs:
         - heroku/install
         - checkout
         - run:
-          name: Heroku Container Push
-          command:
-            heroku container:login
-            heroku container:push web -a anusha-su-devops
-            heroku container:release web -a anusha-su-devops
+            name: Heroku Container Push
+            command:
+              heroku container:login
+              heroku container:push web -a anusha-su-devops
+              heroku container:release web -a anusha-su-devops
 # Workflow - defines what sequence will the jobs run
 workflows:
   simple_workflow: # workflow name
