@@ -39,19 +39,19 @@ jobs:
       - docker/push:
           image: anushadevelopment/education-space
           tag: v1.0.1
-    deploy:
-      docker:
-        - image: cimg/node:16.10
-      steps:
-        - setup_remote_docker
-        - heroku/install
-        - checkout
-        - run:
-            name: Heroku Container Push
-            command:
-              heroku container:login
-              heroku container:push web -a anusha-su-devops
-              heroku container:release web -a anusha-su-devops
+  deploy:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - setup_remote_docker
+      - heroku/install
+      - checkout
+      - run:
+          name: Heroku Container Push
+          command:
+            heroku container:login
+            heroku container:push web -a anusha-su-devops
+            heroku container:release web -a anusha-su-devops
 # Workflow - defines what sequence will the jobs run
 workflows:
   simple_workflow: # workflow name
