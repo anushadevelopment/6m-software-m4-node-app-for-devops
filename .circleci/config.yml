@@ -86,11 +86,11 @@ workflows:
               only: main
       # The scan job:
       - scan:
-        requires:
-          - build
-        filters:
-          branches:
-            only: main
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
       # - publish:
       #     requires:
       #       - test
