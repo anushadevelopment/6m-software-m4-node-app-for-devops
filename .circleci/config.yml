@@ -9,17 +9,18 @@ orbs:
 #Jobs - set of instructions / functions
 jobs:
   scan:
-      docker:
-          - image: cimg/node:16.10
-      environment:
-          IMAGE_NAME: edisonzsq/education-space
-      steps:
-            - checkout
-            - setup_remote_docker      
-            - docker/check
-            - run: docker build -t $IMAGE_NAME .
-            - snyk/scan: 
-                docker-image-name: $IMAGE_NAME
+          docker:
+              - image: cimg/node:16.10
+          environment:
+              IMAGE_NAME: anushadevelopment/education-space
+          steps:
+              - checkout
+              - setup_remote_docker      
+              - docker/check
+              - run: docker build -t $IMAGE_NAME .
+              - snyk/scan: 
+                  docker-image-name: $IMAGE_NAME
+
   build: #Job name
     docker: 
       - image: cimg/node:16.10
