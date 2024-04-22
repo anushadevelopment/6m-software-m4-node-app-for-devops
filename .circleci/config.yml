@@ -4,9 +4,22 @@ orbs:
   node: circleci/node@5.0.1
   docker: circleci/docker@2.1.4
   heroku: circleci/heroku@2.0.0
+  snyk: snyk/snyk@1.5.0
 
 #Jobs - set of instructions / functions
 jobs:
+  scan:
+      docker:
+          - image: cimg/node:16.10
+      environment:
+          IMAGE_NAME: edisonzsq/education-space
+      steps:
+            - checkout
+            - setup_remote_docker      
+            - docker/check
+            - run: docker build -t $IMAGE_NAME .
+            - snyk/scan: 
+                docker-image-name: $IMAGE_NAME
   build: #Job name
     docker: 
       - image: cimg/node:16.10
@@ -56,13 +69,30 @@ jobs:
 workflows:
   simple_workflow: # workflow name
     jobs:
-      - build
+      - build:
+      #additional filters
+          filters:
+            branches:
+              only: main # the build job would only run when code changes are pushed to the main branch.
+          # filters:
+          #   branches:
+          #     only: main
       - test:
           requires:
             - build
-      - publish:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - publish
+          filters:
+            branches:
+              only: main
+      # The scan job:
+      - scan:
+        requires:
+          - build
+        filters:
+          branches:
+            only: main
+      # - publish:
+      #     requires:
+      #       - test
+      # - deploy:
+      #     requires:
+      #       - publish
